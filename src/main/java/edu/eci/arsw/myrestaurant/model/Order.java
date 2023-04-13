@@ -19,6 +19,8 @@ public class Order {
     }
     private int tableNumber;
 
+    private int total;
+
     public Order() {
     }    
     
@@ -66,4 +68,11 @@ public class Order {
         return sb.toString();
     }
 
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getTotal() {
+        return total;
+    }
 }

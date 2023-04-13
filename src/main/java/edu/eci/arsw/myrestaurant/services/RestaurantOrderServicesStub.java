@@ -83,7 +83,9 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
         }
     }
     public Map<Integer, Order> getOrders() throws OrderServicesException {
-
+        for(Order order: tableOrders.values()) {
+            order.setTotal(calculateTableBill(order.getTableNumber()));
+        }
         return tableOrders;
     }
     private static final Map<String, RestaurantProduct> productsMap;
