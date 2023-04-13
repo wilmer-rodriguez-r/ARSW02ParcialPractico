@@ -64,7 +64,6 @@ public class Order {
             sb.append(p).append(" x ").append(orderAmountsMap.get(p)).append("\n");
         });
         return sb.toString();
-
     }
 
 }

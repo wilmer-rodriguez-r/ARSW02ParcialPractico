@@ -19,22 +19,38 @@ package edu.eci.arsw.myrestaurant.restcontrollers;
 import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.ProductType;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
+import edu.eci.arsw.myrestaurant.services.OrderServicesException;
 import edu.eci.arsw.myrestaurant.services.RestaurantOrderServicesStub;
+
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author hcadavid
  */
+
+@RestController
+@RequestMapping(value = "/orders")
 public class OrdersAPIController {
 
+    @Autowired
+    RestaurantOrderServicesStub restaurantOrderServicesStub = null;
+    @GetMapping
+    public ResponseEntity<?> getOrders() {
+        try {
+            Map<Integer, Order> orders =  restaurantOrderServicesStub.getOrders();
+            return new ResponseEntity<>(orders, HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     
 }

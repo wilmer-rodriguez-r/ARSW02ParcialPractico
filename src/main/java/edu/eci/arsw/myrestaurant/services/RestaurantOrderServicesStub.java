@@ -5,14 +5,17 @@ import edu.eci.arsw.myrestaurant.model.Order;
 import edu.eci.arsw.myrestaurant.model.RestaurantProduct;
 import edu.eci.arsw.myrestaurant.beans.BillCalculator;
 import edu.eci.arsw.myrestaurant.model.ProductType;
-import java.util.Map;
-import java.util.Set;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+@Service
 public class RestaurantOrderServicesStub implements RestaurantOrderServices {
 
-    
+    @Autowired
     BillCalculator calc = null;
 
     public RestaurantOrderServicesStub() {
@@ -79,7 +82,10 @@ public class RestaurantOrderServicesStub implements RestaurantOrderServices {
             return calc.calculateBill(tableOrders.get(tableNumber), productsMap);
         }
     }
+    public Map<Integer, Order> getOrders() throws OrderServicesException {
 
+        return tableOrders;
+    }
     private static final Map<String, RestaurantProduct> productsMap;
 
     private static final Map<Integer, Order> tableOrders;
